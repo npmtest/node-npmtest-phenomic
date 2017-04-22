@@ -35,47 +35,26 @@
 ```json
 
 {
-    "name": "phenomic",
-    "version": "0.21.1",
-    "description": "Modern website generator based on the React and Webpack ecosystem.",
-    "keywords": [
-        "webpack",
-        "react",
-        "ssg",
-        "static",
-        "file",
-        "site",
-        "website",
-        "blog",
-        "generator",
-        "markdown",
-        "jekyll",
-        "wintersmith",
-        "blacksmith",
-        "metalsmith",
-        "gatsby",
-        "gatsbyjs"
-    ],
-    "author": "Maxime Thirouin",
-    "license": "MIT",
-    "homepage": "https://phenomic.io",
-    "repository": "https://github.com/MoOx/phenomic.git",
-    "main": "lib/index.js",
-    "files": [
-        "npm",
-        "lib",
-        "src",
-        "themes",
-        "docs/content",
-        "!**/__tests__"
-    ],
+    "#eslintConfig/rules/import/no-extraneous-dependencies": "phenomic usage in theme is not specified in package.json (and can't be for now)",
+    "#eslintConfig/rules/import/no-unresolved": "deps in docs & theme are installed after the lint step",
+    "author": {
+        "name": "Maxime Thirouin"
+    },
+    "babel": {
+        "presets": [
+            "babel-preset-env",
+            "babel-preset-stage-1",
+            "babel-preset-react"
+        ],
+        "plugins": [
+            "babel-plugin-flow-react-proptypes"
+        ]
+    },
     "bin": {
         "phenomic": "npm/bin.js"
     },
-    "engines": {
-        "node": ">=4.2.0",
-        "npm": ">=3.0.0",
-        "yarn": ">=0.16.0"
+    "bugs": {
+        "url": "https://github.com/MoOx/phenomic/issues"
     },
     "dependencies": {
         "babel-polyfill": "^6.5.0",
@@ -124,6 +103,7 @@
         "webpack-sources": "^0.2.3",
         "yargs": "^4.3.1"
     },
+    "description": "Modern website generator based on the React and Webpack ecosystem.",
     "devDependencies": {
         "babel-cli": "^6.14.0",
         "babel-core": "^6.14.0",
@@ -166,59 +146,15 @@
         "suppose": "^0.6.1",
         "webpack": "^2.3.0"
     },
-    "peerDependencies": {
-        "babel-cli": "^6.14.0",
-        "babel-core": "^6.14.0",
-        "extract-text-webpack-plugin": "^2.1.0",
-        "history": "^2.0.0",
-        "react": "^0.14.0 || ^15.0.0-rc.1",
-        "react-dom": "^0.14.0 || ^15.0.0-rc.1",
-        "react-helmet": "^3.0.0",
-        "react-redux": "^4.0.0",
-        "react-router": "^2.3.0",
-        "redux": "^3.0.0",
-        "webpack": "^2.3.0"
+    "directories": {},
+    "dist": {
+        "shasum": "d9677fe01cf0dbeb6b228986b31c8afa2d3ab48d",
+        "tarball": "https://registry.npmjs.org/phenomic/-/phenomic-0.21.1.tgz"
     },
-    "scripts": {
-        "postinstall": "node npm/postinstall.js",
-        "transpile": "babel --ignore __tests__ --copy-files src --out-dir lib",
-        "prepublish": "rimraf lib && npm run transpile",
-        "#lint:js:eslint": "https://github.com/eslint/eslint/issues/5679",
-        "lint:js:eslint": "eslint --ignore-path .gitignore --fix src scripts npm __tests__",
-        "lint:js:flow": "flow check",
-        "lint:js": "npm-run-all --parallel lint:js:*",
-        "lint": "npm-run-all --parallel lint:*",
-        "tests": "cross-env TESTING=1 jest --runInBand --coverage src",
-        "e2e:tests": "jest --runInBand --forceExit e2e-tests",
-        "phenomic-theme-base-linting": "eslint --config package.json --ignore-path .gitignore --fix themes/phenomic-theme-base/scripts themes/phenomic-theme-base/src",
-        "phenomic-theme-base-start": "cd themes/phenomic-theme-base && npm start",
-        "test-setup": "cd test-setup && npm test",
-        "docs-linting": "eslint --ignore-path .gitignore --fix docs/scripts docs/src",
-        "pretest-docs": "npm run docs-linting",
-        "test-docs": "cd docs && npm test",
-        "docs-start": "cd docs && npm start",
-        "predocs-deploy": "cd docs && npm run showcase-screenshots",
-        "docs-deploy": "cd docs && npm run build && cd .. && npm run themes:prepare",
-        "postdocs-deploy": "cd docs && ./scripts/deploy.sh",
-        "themes:prepare": "cd themes/phenomic-theme-base && npm run build",
-        "postthemes:prepare": "cp-cli themes/phenomic-theme-base/dist docs/dist/themes/base/demo",
-        "pretest": "npm run transpile && npm run lint",
-        "test": "npm run tests && npm run phenomic-theme-base-linting && npm run test-setup && npm run e2e:tests",
-        "posttest": "npm run test-docs",
-        "coverage": "cat ./coverage/lcov.info | coveralls",
-        "cleanup": "rimraf yarn.lock docs/yarn.lock themes/phenomic-theme-base/yarn.lock node_modules docs/node_modules themes/phenomic-theme-base/node_modules test-setup",
-        "release": "npmpub",
-        "postrelease": "npm run docs-deploy"
-    },
-    "babel": {
-        "presets": [
-            "babel-preset-env",
-            "babel-preset-stage-1",
-            "babel-preset-react"
-        ],
-        "plugins": [
-            "babel-plugin-flow-react-proptypes"
-        ]
+    "engines": {
+        "node": ">=4.2.0",
+        "npm": ">=3.0.0",
+        "yarn": ">=0.16.0"
     },
     "eslintConfig": {
         "root": true,
@@ -240,17 +176,16 @@
             "import/no-unresolved": 0
         }
     },
-    "#eslintConfig/rules/import/no-extraneous-dependencies": "phenomic usage in theme is not specified in package.json (and can't be for now)",
-    "#eslintConfig/rules/import/no-unresolved": "deps in docs & theme are installed after the lint step",
-    "stylelint": {
-        "extends": "stylelint-config-standard",
-        "rules": {
-            "block-no-empty": null,
-            "comment-empty-line-before": null,
-            "comment-whitespace-inside": null,
-            "selector-pseudo-class-no-unknown": null
-        }
-    },
+    "files": [
+        "npm",
+        "lib",
+        "src",
+        "themes",
+        "docs/content",
+        "!**/__tests__"
+    ],
+    "gitHead": "f17b19024a344be171c334d430299347777ffef7",
+    "homepage": "https://phenomic.io",
     "jest": {
         "testEnvironment": "node",
         "notify": true,
@@ -272,7 +207,92 @@
             "/stub/",
             "/_output/"
         ]
-    }
+    },
+    "keywords": [
+        "webpack",
+        "react",
+        "ssg",
+        "static",
+        "file",
+        "site",
+        "website",
+        "blog",
+        "generator",
+        "markdown",
+        "jekyll",
+        "wintersmith",
+        "blacksmith",
+        "metalsmith",
+        "gatsby",
+        "gatsbyjs"
+    ],
+    "license": "MIT",
+    "main": "lib/index.js",
+    "maintainers": [
+        {
+            "name": "moox"
+        }
+    ],
+    "name": "phenomic",
+    "optionalDependencies": {},
+    "peerDependencies": {
+        "babel-cli": "^6.14.0",
+        "babel-core": "^6.14.0",
+        "extract-text-webpack-plugin": "^2.1.0",
+        "history": "^2.0.0",
+        "react": "^0.14.0 || ^15.0.0-rc.1",
+        "react-dom": "^0.14.0 || ^15.0.0-rc.1",
+        "react-helmet": "^3.0.0",
+        "react-redux": "^4.0.0",
+        "react-router": "^2.3.0",
+        "redux": "^3.0.0",
+        "webpack": "^2.3.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MoOx/phenomic.git"
+    },
+    "scripts": {
+        "#lint:js:eslint": "https://github.com/eslint/eslint/issues/5679",
+        "cleanup": "rimraf yarn.lock docs/yarn.lock themes/phenomic-theme-base/yarn.lock node_modules docs/node_modules themes/phenomic-theme-base/node_modules test-setup",
+        "coverage": "cat ./coverage/lcov.info | coveralls",
+        "docs-deploy": "cd docs && npm run build && cd .. && npm run themes:prepare",
+        "docs-linting": "eslint --ignore-path .gitignore --fix docs/scripts docs/src",
+        "docs-start": "cd docs && npm start",
+        "e2e:tests": "jest --runInBand --forceExit e2e-tests",
+        "lint": "npm-run-all --parallel lint:*",
+        "lint:js": "npm-run-all --parallel lint:js:*",
+        "lint:js:eslint": "eslint --ignore-path .gitignore --fix src scripts npm __tests__",
+        "lint:js:flow": "flow check",
+        "phenomic-theme-base-linting": "eslint --config package.json --ignore-path .gitignore --fix themes/phenomic-theme-base/scripts themes/phenomic-theme-base/src",
+        "phenomic-theme-base-start": "cd themes/phenomic-theme-base && npm start",
+        "postdocs-deploy": "cd docs && ./scripts/deploy.sh",
+        "postinstall": "node npm/postinstall.js",
+        "postrelease": "npm run docs-deploy",
+        "posttest": "npm run test-docs",
+        "postthemes:prepare": "cp-cli themes/phenomic-theme-base/dist docs/dist/themes/base/demo",
+        "predocs-deploy": "cd docs && npm run showcase-screenshots",
+        "prepublish": "rimraf lib && npm run transpile",
+        "pretest": "npm run transpile && npm run lint",
+        "pretest-docs": "npm run docs-linting",
+        "release": "npmpub",
+        "test": "npm run tests && npm run phenomic-theme-base-linting && npm run test-setup && npm run e2e:tests",
+        "test-docs": "cd docs && npm test",
+        "test-setup": "cd test-setup && npm test",
+        "tests": "cross-env TESTING=1 jest --runInBand --coverage src",
+        "themes:prepare": "cd themes/phenomic-theme-base && npm run build",
+        "transpile": "babel --ignore __tests__ --copy-files src --out-dir lib"
+    },
+    "stylelint": {
+        "extends": "stylelint-config-standard",
+        "rules": {
+            "block-no-empty": null,
+            "comment-empty-line-before": null,
+            "comment-whitespace-inside": null,
+            "selector-pseudo-class-no-unknown": null
+        }
+    },
+    "version": "0.21.1"
 }
 ```
 
